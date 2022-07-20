@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@psibean/discord.js-pagination": "^4.0.5",
+    "cheerio": "^1.0.0-rc.12",
+    "discord.js": "^14.0.2",
+    "google-images": "^2.1.0",
+    "mysql2": "^2.3.3",
+    "pm2": "^5.2.0",
+    "request": "^2.88.2",
+    "undici": "^5.8.0"
+  }
+}
