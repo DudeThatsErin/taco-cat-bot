@@ -4,7 +4,7 @@ const config = require('../config/config.json');
 const help = {
     color: 0x0099ff,
     title: 'All of the commands',
-    description: 'These are all of the commands you can use with this bot.\n\`\`\`markdown\nreport\nstatus-report\nping\ninvite\ntaco\ncoding-help\ndev\`\`\`',
+    description: 'These are all of the commands you can use with this bot.\n\`\`\`markdown\nreport\nstatus-report\nping\ninvite\ncoding-help\ndev\ntaco\`\`\`',
     timestamp: new Date(),
 }
 
@@ -12,9 +12,8 @@ module.exports = {
     name: 'help',
     description: 'Provides information on all of our commands.',
     aliases: ['helpme', 'info', 'command-info'],
-    usage: 'taco.help',
-    example: 'taco.info or taco.command-info',
-    inHelp: 'yes',
+    usage: `${config.prefix}help`,
+    example: `${config.prefix}info or ${config.prefix}command-info`,
     execute(message, args) {
   
         let cmdd = args[0];
@@ -24,10 +23,9 @@ module.exports = {
 
 			const cmd = message.client.commands.get(args[0]) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
 			if (!cmd) return message.channel.send("That command could not be found!");
-			if (!cmd.inHelp) return message.channel.send("No help for that command could be found!");
 
 			const emb = new Discord.EmbedBuilder()
-				.setColor('#e8bffd')
+				.setColor(0xe8bffd)
 				.setTitle(`Help for \`${config.prefix}${cmd.name}\``)
 			if (cmd.description) {
 				emb.setDescription(cmd.description);

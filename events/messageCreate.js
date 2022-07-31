@@ -1,8 +1,7 @@
 const config = require('../config/config.json');
-const { ActionRowBuilder, ButtonBuilder } = require('discord.js');
 const me = require('../config/dev.json');
 const Discord = require('discord.js');
-
+const ee = require('../config/embed.json');
 module.exports = {
     name: 'messageCreate',
     async execute(message, client) {
@@ -27,11 +26,11 @@ module.exports = {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-        if (!command) return message.channel.send({ content: `That command does not exist. Run \`taco.help\` to see all of my commands.` });
+        if (!command) return message.channel.send({ content: `That command does not exist. Run \`${config.prefix}help\` to see all of my commands.` });
         //console.log(command);
 
         // owner only
-        if (command.ownerOnly === 'yes') {
+        if (command.ownerOnly === 'yes' || command.modOnly === 'yes' || command.ownerOnly === 1 || command.modOnly === 1) {
             if (!message.author.id === me.id) {
                 return message.reply({ content: `This is only a command Erin (<@${me.id}>) can use. If you are seeing this in error use the \`${config.prefix}report\` command.` });
             }
@@ -63,19 +62,19 @@ module.exports = {
             command.execute(message, args, client);
         } catch (error) {
             console.error(error);
-            const row = new ActionRowBuilder()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new ButtonBuilder()
+                    new Discord.ButtonBuilder()
                         .setLabel('Erin\'s Support Server')
                         .setStyle('Link')
                         .setURL('https://discord.gg/tT3VEW8AYF'),
-                    new ButtonBuilder()
+                    new Discord.ButtonBuilder()
                         .setLabel('Fill out this form!')
                         .setStyle('Link')
-                        .setURL('https://codinghelp.site')
+                        .setURL('https://dudethatserin.com')
                 )
             const embed = {
-                color: '#AA2C2C',
+                color: 0xAA2C2C,
                 title: 'Oh no! An _error_ has appeared!',
                 description: `**Contact Bot Owner:** <@${me.id}>`,
                 fields: [

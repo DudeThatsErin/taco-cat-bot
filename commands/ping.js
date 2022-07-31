@@ -6,8 +6,7 @@ module.exports = {
     name: 'ping',
     description: 'Makes sure the bot can hear commands.',
     aliases: ['pong', 'beep', 'online', 'bot', 'hello', 'hi'],
-    inHelp: 'yes',
-    example: 'taco.ping or taco.hi',
+    example: `${config.prefix}ping or ${config.prefix}hi`,
     cooldown: 5,
     execute(message, client) {
         let days = Math.floor(message.client.uptime / 86400000);
@@ -16,7 +15,7 @@ module.exports = {
         let seconds = Math.floor(message.client.uptime / 1000) % 60;
 
         let embed = {
-          color: '#ffffff',
+          color: 0xffffff,
           title: `${bot.name} is online!`,
           url: bot.url,
           thumbnail: {
